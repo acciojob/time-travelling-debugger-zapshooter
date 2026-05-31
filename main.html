@@ -1,16 +1,112 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
 	<link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
 
+  <!-- ═══ HEADER ═══ -->
+  <header class="site-header">
+    <div class="header-left">
+      <span class="logo-icon">⏳</span>
+      <div class="logo-text">
+        <span class="logo-title">CHRONOSTACK</span>
+        <span class="logo-sub">Time-Traveling Debugger v2.0.26</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="status-dot"></span>
+      <span class="status-label">TEMPORAL ENGINE READY</span>
+    </div>
+  </header>
+
+  <!-- ═══ MAIN LAYOUT ═══ -->
+  <main class="debugger-layout">
+
+    <!-- LEFT: Source Code Panel -->
+    <section class="panel panel--code" id="codePanel">
+      <div class="panel-header">
+        <span class="panel-icon">📜</span>
+        <span class="panel-title">SOURCE CODE</span>
+        <span class="panel-badge" id="currentFnBadge">—</span>
+      </div>
+      <div class="code-scroll">
+        <pre class="code-block" id="codeBlock"></pre>
+      </div>
+    </section>
+
+    <!-- CENTER: Call Stack Panel -->
+    <section class="panel panel--stack" id="stackPanel">
+      <div class="panel-header">
+        <span class="panel-icon">🗂</span>
+        <span class="panel-title">CALL STACK</span>
+        <span class="panel-badge" id="stackDepthBadge">depth: 0</span>
+      </div>
+
+      <div class="stack-wrapper">
+        <div class="stack-frames" id="stackFrames">
+          <!-- frames injected by JS -->
+        </div>
+        <div class="stack-base">
+          <span>▓ STACK BASE (Global Execution Context)</span>
+        </div>
+      </div>
+
+      <!-- Timeline scrubber -->
+      <div class="timeline-bar">
+        <span class="tl-label">◀ TIME</span>
+        <div class="tl-track">
+          <div class="tl-progress" id="tlProgress"></div>
+          <div class="tl-thumb" id="tlThumb"></div>
+          <div class="tl-steps" id="tlSteps"></div>
+        </div>
+        <span class="tl-label">TIME ▶</span>
+      </div>
+    </section>
+
+    <!-- RIGHT: Execution Log Panel -->
+    <section class="panel panel--log" id="logPanel">
+      <div class="panel-header">
+        <span class="panel-icon">🖥</span>
+        <span class="panel-title">EXECUTION LOG</span>
+        <button class="clear-btn" id="clearLog">CLR</button>
+      </div>
+      <div class="log-scroll" id="logScroll">
+        <div class="log-empty" id="logEmpty">Awaiting execution…</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ CONTROLS ═══ -->
+  <footer class="controls-bar">
+    <div class="scenario-picker">
+      <label class="ctrl-label">SCENARIO</label>
+      <select id="scenarioPicker">
+        <option value="factorial">Recursive Factorial</option>
+        <option value="fibonacci">Fibonacci Sequence</option>
+        <option value="nested">Nested Function Calls</option>
+        <option value="closure">Closure & Scope</option>
+      </select>
+    </div>
+
+    <div class="ctrl-buttons">
+      <button class="ctrl-btn" id="btnReset" title="Reset">⟲ RESET</button>
+      <button class="ctrl-btn ctrl-btn--prev" id="btnPrev" title="Step Back" disabled>◀◀ BACK</button>
+      <button class="ctrl-btn ctrl-btn--play" id="btnPlay" title="Play/Pause">▶ PLAY</button>
+      <button class="ctrl-btn ctrl-btn--next" id="btnNext" title="Step Forward">STEP ▶▶</button>
+    </div>
+
+    <div class="speed-ctrl">
+      <label class="ctrl-label">SPEED</label>
+      <input type="range" id="speedSlider" min="200" max="2000" value="900" step="100">
+      <span class="ctrl-label" id="speedLabel">1.1×</span>
+    </div>
+  </footer>
+
+  <!-- ═══ RETURN VALUE TOAST ═══ -->
+  <div class="return-toast" id="returnToast"></div>
+
+  <script type="text/javascript" src="./script.js"></script>
 </body>
-
 </html>
